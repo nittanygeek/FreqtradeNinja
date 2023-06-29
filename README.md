@@ -1,5 +1,5 @@
 # FreqtradeNinja
-An alternative frequi, specifically for the NostalgiaForInfinity strategy.
+An alternative to frequi, specifically for the NostalgiaForInfinity strategy.
 
 ## Roadmap
 - [ ] Visualize open trade grinds
