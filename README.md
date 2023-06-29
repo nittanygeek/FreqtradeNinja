@@ -1,0 +1,2 @@
+# FreqtradeNinja
+An alternative frequi
