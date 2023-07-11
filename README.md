@@ -1,5 +1,5 @@
 # FreqtradeNinja
-An alternative to frequi, specifically for the NostalgiaForInfinity strategy.
+Slice through your Freqtrade data and visualize your trades in a different way.  An alternative to frequi, specifically for the NostalgiaForInfinity strategy to visualize grinding trade orders.
 
 ## Roadmap
 - [ ] Visualize open, grinding trades on NFIX3
