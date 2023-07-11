@@ -29,4 +29,5 @@ flask run --host 0.0.0.0 --debug
 ## Roadmap
 - [x] Visualize open, grinding trades on NFIX3
 - [ ] Calculate estimated remaining order grinds, based on average order profits and average order frequency
-- [ ] Include visuals for buy/sell signal logic
+- [ ] Include visuals for the strategy buy/sell signal logic
+- [ ] Dockerize the install process
