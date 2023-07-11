@@ -1,0 +1,57 @@
+body.dark-mode {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.navbar {
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  margin: 0 auto;
+  font-family: "Smooch", sans-serif;
+  font-size: 4em;
+}
+
+.dark-mode .navbar-brand {
+  color: #fff;
+}
+
+.dark-mode .navbar {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.btn-dark-mode {
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: #1f1f1f;
+  font-size: 1.5rem;
+}
+
+.dark-mode .btn-dark-mode {
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.dark-mode .card {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.card.selected {
+  background-color: #cce5ff;
+  border: 2px solid #007bff;
+  color: #000;
+}
+
+.dark-mode .card.selected {
+  background-color: #007bff;
+  border: 2px solid #cce5ff;
+  color: #fff;
+}
+

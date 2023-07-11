@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Trades</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Smooch">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const navbar = document.getElementById('navbar');
+            const table = document.getElementById('order-table');
+            body.classList.toggle('dark-mode');
+            navbar.classList.toggle('nav-dark');
+            table.classList.toggle('table-dark');
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="{{ dark_mode_class }}">
+    <nav class="navbar {{ dark_mode_nav_class }}" id="navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Freqtrade Ninja</span>
+            <button class="btn btn-light btn-dark-mode" onclick="toggleDarkMode()">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>          
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+        {% for trade in open_trades %}
+            <div class="col-md-4">
+            <div class="card mb-4" onclick="updateOrderTable('{{ trade[0] }}')" data-order-id="{{ trade[0] }}">
+                <div class="card-body">
+                <h3 class="card-title">#{{ trade[0] }} {{ trade[2] }}</h3>
+                <ul>
+                    <li class="card-text"><strong>Entry Price:</strong> {{ trade[12] }}</li>
+                    <li class="card-text"><strong>Open Date/Time:</strong> {{ trade[24] }}</li>
+                    <li class="card-text"><strong>Realized Profits:</strong> {{ trade[17] }}</li>
+                </ul>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+        <canvas id="profit-chart"></canvas>
+        <table class="table table-striped mt-4 {{ table_dark_class }}" id="order-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date Filled</th>
+                <th>Side</th>
+                <th>Amount</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table rows will be dynamically updated -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let profitChart = null;
+      
+        function updateOrderTable(orderId) {
+          // Clear existing table rows
+          document.getElementById("order-table").getElementsByTagName("tbody")[0].innerHTML = "";
+      
+          // Find the clicked trade card by order ID
+          const tradeCards = document.querySelectorAll(".card");
+          tradeCards.forEach(card => {
+            if (card.getAttribute("data-order-id") === orderId) {
+              // Toggle the "selected" class for the clicked trade card
+              card.classList.toggle("selected");
+            } else {
+              // Remove the "selected" class for other trade cards
+              card.classList.remove("selected");
+            }
+          });
+      
+          // Fetch the order details for the selected trade
+          fetch(`/orders/${orderId}`)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data); // Log the JSON response to the console for debugging
+      
+              // Update the table rows with the fetched order details
+              const tableBody = document.getElementById("order-table").getElementsByTagName("tbody")[0];
+              data.forEach(order => {
+                const newRow = tableBody.insertRow();
+                newRow.innerHTML = `
+                  <td>${order.order_id}</td>
+                  <td>${order.order_filled_date}</td>
+                  <td>${order.side}</td>
+                  <td>${order.amount}</td>
+                  <td>${order.price}</td>
+                `;
+              });
+      
+              // Calculate order profits based on buy and sell sequence
+              const orderProfits = calculateOrderProfits(data);
+              const orderPrices = data.map(order => order.price);
+              const orderCosts = data.map(order => order.cost);
+      
+              // Destroy the existing chart instance if it exists
+              if (profitChart) {
+                profitChart.destroy();
+              }
+      
+              // Generate line chart
+              generateLineChart(orderProfits, orderPrices, orderCosts);
+            });
+        }
+      
+        function calculateOrderProfits(orders) {
+          let cumulativeProfit = 0;
+          let orderProfits = [];
+      
+          orders.forEach(order => {
+            if (order.side === 'buy') {
+              cumulativeProfit -= order.cost;
+            } else if (order.side === 'sell') {
+              cumulativeProfit += order.cost;
+            }
+            orderProfits.push(cumulativeProfit);
+          });
+      
+          return orderProfits;
+        }
+      
+        function generateLineChart(data, prices, costs) {
+          const ctx = document.getElementById('profit-chart').getContext('2d');
+      
+          profitChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.map((_, index) => `Trade ${index + 1}`),
+              datasets: [
+                {
+                  label: 'Cumulative USDT Profit',
+                  data: data,
+                  borderColor: 'rgba(255, 0, 0, 1)',
+                  borderWidth: 1,
+                  fill: true,
+                  backgroundColor: function(context) {
+                    const index = context.dataIndex;
+                    const value = context.dataset.data[index];
+                    return value >= 0 ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)';
+                  }
+                }
+              ]
+            }
+          });
+        }
+      </script>
+      
+      
+             
+</body>
+  
+</html>
