@@ -17,7 +17,11 @@ source venv/bin/activate
 ```
 pip install flask sqlite3
 ```
-4. Run the Flask App
+4. Update config.py to include the path to your database
+```
+DATABASE = '/path/to/your/freqtrade/user_data/tradesv3.sqlite'
+```
+5. Run the Flask App
 ```
 flask run --host 0.0.0.0 --debug
 ```
