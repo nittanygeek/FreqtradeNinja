@@ -1,0 +1,10 @@
+version: '3'
+services:
+  freqtrade-ninja:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    volumes:
+      - /path/to/your/local/freqtrade/user_data:/freqtrade/user_data
