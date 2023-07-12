@@ -10,12 +10,17 @@ git clone https://github.com/nittanygeek/FreqtradeNinja.git
 ```
 2. Setup a virtual environment for python
 ```
-virtenv venv
+virtualenv venv
 source venv/bin/activate
 ```
 3. Install the Python dependencies
 ```
 pip install flask sqlite3
+```
+4. Set Environment Variables
+```
+export FLASK_APP=app
+export FLASK_ENV=development
 ```
 4. Update config.py to include the path to your database
 ```
