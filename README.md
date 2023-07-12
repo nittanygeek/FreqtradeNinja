@@ -6,6 +6,17 @@ Slice through your Freqtrade data and visualize your trades in a different way. 
 > **Warning**
 > The code is still very early in development and may contain bugs.  As always, use at your own risk and be sure to report bugs to the Issue tracker as you find them.  Thanks!
 
+## Install Instructions (Docker)
+1. Clone the git repo to the server running Freqtrade.
+```
+git clone https://github.com/nittanygeek/FreqtradeNinja.git
+```
+2. Replace the "/path/to/your/local/freqtrade/user_data" with the path to your own in the docker-compose.yml file.  Leave the ":/freqtrade/user_data" at the end.
+3. Start the docker container with compose:
+```
+sudo docker compose up -d
+```
+
 ## Install Instructions (Developer)
 1. Clone the git repo to the server running Freqtrade.
 ```
