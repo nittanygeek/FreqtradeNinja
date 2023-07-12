@@ -3,6 +3,9 @@
 # FreqtradeNinja
 Slice through your Freqtrade data and visualize your trades in a different way.  An alternative to frequi, specifically for the NostalgiaForInfinity strategy to visualize grinding trade orders.
 
+> **Warning**
+> The code is still very early in development and may contain bugs.  As always, use at your own risk and be sure to report bugs to the Issue tracker as you find them.  Thanks!
+
 ## Install Instructions (Developer)
 1. Clone the git repo to the server running Freqtrade.
 ```
@@ -25,6 +28,11 @@ DATABASE = '/path/to/your/freqtrade/user_data/tradesv3.sqlite'
 ```
 flask run --host 0.0.0.0 --debug
 ```
+
+## Support Me!
+Like what you see?  Want to see more development?  Buy me a coffee with BTC!
+
+![Screenshot](donationqr.png)
 
 ## Roadmap
 - [x] Visualize open, grinding trades on NFIX3
