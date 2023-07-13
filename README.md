@@ -29,7 +29,7 @@ source venv/bin/activate
 ```
 3. Install the Python dependencies
 ```
-pip install flask sqlite3
+pip install flask
 ```
 4. Set Environment Variables
 ```
