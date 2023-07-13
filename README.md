@@ -11,8 +11,12 @@ Slice through your Freqtrade data and visualize your trades in a different way. 
 ```
 git clone https://github.com/nittanygeek/FreqtradeNinja.git
 ```
-2. Replace the "/path/to/your/local/freqtrade/user_data" with the path to your own in the docker-compose.yml file.  Leave the ":/freqtrade/user_data" at the end.
-3. Start the docker container with compose:
+2. Replace the volume path to your local freqtrade/user_data in the docker-compose.yml file to match your own.  Be sure to leave the ":/freqtrade/user_data" at the end.
+```
+volumes:
+      - /path/to/your/freqtrade/user_data:/freqtrade/user_data
+```
+3. Start the container with docker compose:
 ```
 sudo docker compose up -d
 ```
