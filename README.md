@@ -1,4 +1,4 @@
-![Screenshot](screenshot.png)
+![Screenshot](light-dark-screenshot.png)
 
 # FreqtradeNinja
 Slice through your Freqtrade data and visualize your trades in a different way.  An alternative to frequi, specifically for the NostalgiaForInfinity strategy to visualize grinding trade orders.
