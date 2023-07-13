@@ -6,7 +6,7 @@ Slice through your Freqtrade data and visualize your trades in a different way. 
 > **Warning**
 > The code is still very early in development and may contain bugs.  As always, use at your own risk and be sure to report bugs to the Issue tracker as you find them.  Thanks!
 
-## Install Instructions (Docker)
+## Install Instructions (Docker - Recommended)
 1. Clone the git repo to the server running Freqtrade.
 ```
 git clone https://github.com/nittanygeek/FreqtradeNinja.git
