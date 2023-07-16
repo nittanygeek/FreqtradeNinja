@@ -7,4 +7,4 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - /home/hyndsbr/freqtrade/user_data:/freqtrade/user_data
+      - /path/to/your/freqtrade/user_data:/freqtrade/user_data
